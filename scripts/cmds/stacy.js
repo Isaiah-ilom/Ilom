@@ -16,9 +16,9 @@ module.exports.config = {
 };
 
 const ANTHROPIC_API_KEY = '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';
-const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/conversations';
+const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/complete';
 
-async function getAnthropicResponse(message, chatHistory) {
+async function getAnthropicResponse(message) {
   try {
     const response = await axios.post(ANTHROPIC_API_URL, {
       prompt: `Human: ${message}\n\nAssistant: `,
@@ -46,7 +46,7 @@ module.exports.handleReply = async function ({ api, event, handleReply }) {
   if (handleReply.author !== senderID) return;
 
   try {
-    const response = await getAnthropicResponse(body, []);
+    const response = await getAnthropicResponse(body);
     api.sendMessage(response, threadID, messageID);
   } catch (error) {
     console.error(`Error: ${error.message}`);
@@ -77,7 +77,7 @@ module.exports.run = async function ({ api, args, event }) {
     api.sendMessage(helpMessage, threadID, messageID);
   } else {
     try {
-      const response = await getAnthropicResponse(inp, []);
+      const response = await getAnthropicResponse(inp);
       api.sendMessage(response, threadID, (error, info) => {
         if (!error) {
           global.client.handleReply.push({

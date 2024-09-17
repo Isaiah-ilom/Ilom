@@ -707,18 +707,3 @@ process.on('SIGINT', () => {
   cleanup();
   process.exit(0);
 });
-
-// Export the module
-module.exports = {
-  config: {
-    name: 'lea',
-    description: "Interact with Lea, an AI assistant powered by Gemini",
-    usage: "{prefix}lea <message>",
-    cooldown: 3,
-    permissions: [0, 1, 2],
-  },
-  onStart: onStart,
-  onChat: onChat
-};
-
-console.log("Lea AI Assistant module loaded successfully.");

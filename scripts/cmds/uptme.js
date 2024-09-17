@@ -1,4 +1,4 @@
-const os = require("os");
+-cmd install uptime.js const os = require("os");
 const fs = require("fs-extra");
 
 const startTime = new Date(); // Moved outside onStart
@@ -7,7 +7,7 @@ module.exports = {
   config: {
     name: "uptime",
     aliases: ["up", "upt", "stats"],
-    author: "ArYAN",
+    author: "Heis",
     countDown: 0,
     role: 0,
     category: "system",
